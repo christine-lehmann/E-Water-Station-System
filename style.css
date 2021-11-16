@@ -1,0 +1,233 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lobster&family=Quicksand:wght@300&display=swap');
+
+
+*{
+	padding: 0px;
+	margin: 0px;
+}
+ body{
+	position:absolute;
+	width:100%;
+	height:100% ;
+	background-image: url('bg.jpg');
+	
+
+}
+.image_1{
+	background:url(1.jpg)no-repeat;
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+	height: 635px;
+	text-align: center;
+	position: absolute;
+}
+.layer{
+	width: 100%;
+	height: 635px;
+	position: absolute;
+	text-align: center;
+
+}
+.sidebar{
+	position: absolute;
+	width: 300px;
+	height: 100%;
+	background: #000;
+}
+.sidebar ul li{
+	list-style: none;
+	color: #fff;
+	font-size: 20px;
+	padding: 20px 24px
+}
+.text_1{
+	color: black;
+	text-align: center;
+	transform: translate(-50%,-50%);
+	position: absolute;
+	top: 53%;
+	left:50%;
+
+}
+.rectangle{
+	width: 60px;
+	height: 60px;
+	border-radius:70%;
+	font-family: 'Quicksand', sans-serif; 
+	background: transparent;
+	border:3px solid black;
+	transform: translate(-50%,-50%);
+	position: absolute;
+	margin-top: -60px;
+	left: 50%
+}
+.rectangle h2{
+	color:black;
+	font-size: 50px;
+	font-family: 'Dancing Script', cursive;
+	font-weight: lighter;
+	transform: translate(-50%,-50%);
+	position: absolute;
+	left: 50%;
+	top:50%;
+}
+.layer span{
+	text-align: center;
+	width: 80px;
+	height: 2px;
+	position: absolute;
+	margin-left: -40px;
+	background:black;
+}
+.text_1 h1 {
+	color:#052753;
+	font-size:50px;
+	letter-spacing: 4px;
+}
+.text_1 p{
+	color:#06234b;
+	font-size:25px;
+	font-family:bold;
+
+}
+.text_1 j{
+	color:black;
+	font-size:25px;
+	font-family:bold;
+
+}
+
+.text_1_btn {
+	background:white;
+	font-family: 'Quicksand', sans-serif
+	color:white;
+	outline: none;
+	border: 3px solid black;
+	width:130px;
+	height: 35px;
+}
+.text_1_btn:hover{
+	background:black;
+	color:white;
+	transition: 0.8 ease;
+	border: none;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Josefin Sans', sans-serif;
+}
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+
+body{
+   background-color: lightblue;
+}
+
+.wrapper{
+  display: flex;
+  position: relative;
+}
+
+.wrapper .sidebar{
+  width: 200px;
+  height: 100%;
+  padding: 30px 0px;
+  position: fixed;
+  background:#336cba;
+
+
+ }
+
+.wrapper .sidebar h2{
+  color: #ffff;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.wrapper .sidebar ul li{
+  padding: 15px;
+  border-bottom: 3px solid lightblue;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}    
+.wrapper .sidebar ul li a{
+  color: #ffff;
+  display: block;
+}
+
+.wrapper .sidebar ul li a .fas{
+  width: 25px;
+}
+
+.wrapper .sidebar ul li:hover{
+  background-color: lightblue;
+}
+    
+.wrapper .sidebar ul li:hover a{
+  color: #fff;
+}
+   fieldset {  
+
+   width: 700px;
+   padding: 67px;
+   margin:500px;
+   color:#052753;
+   background-color: #fff;
+
+
+
+
+   }
+      input  { 
+       padding:5px 10px;
+	   margin:10px; 
+	   border-style: line;
+	
+	  
+      
+
+
+
+	  }
+	    .btn .color2{ 
+
+        padding:10px 10px; 
+		text-decoration: none;
+		background-color:#336cba;
+		color: rgb(236, 225, 225);
+
+
+
+
+
+
+		}
+		.btn .color3{ 
+
+			padding:10px 10px; 
+			text-decoration: none;
+			background-color:#336cba;
+			color: rgb(236, 225, 225);
+	
+		} 
+		h4 { 
+			color:#052753;
+			font-size:20px;
+			letter-spacing: 4px;
+
+
+
+		}
+        h3 { 
+            font-family: Arial black;
+
+
+
+		}
