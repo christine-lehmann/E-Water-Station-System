@@ -1,63 +1,83 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     
 	<title>J&A AQUAMART WEBSITE</title>
     <link rel="shortcut icon" type="image/x-icon" href="drop.png" />
 </head>
 <meta charset="utf-8">
-<link rel="stylesheet"type="text/css"href="style.css">
-<meta name="viewport"content="width-device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="viewport" content="width-device-width, initial-scale=1">
+
 <body>
 
-	<div class="main">
-		<div class="image_1"></div>
-		<div class="layer">
-			<div class="text_1">
-				<div class="rectangle"><h2></h2></div>
+    <div class="main">
+        <div class="image_1"></div>
+        <div class="layer">
+            <div class="text_1">
+                <div class="rectangle">
+                    <h2></h2>
+                </div>
                 <fieldset>
-				<p>J&A AQUAMART</p>
-                <h4>WATER REFILLING STATION</h>
-				
-				<br>	
-				<span></span>
-				<br>
-				<j> </j>
-				<br>
-                <h3>ORDER SLIP</h3>
-                <hr> </hr>
-                <br> 
-                <tr><input type="text" placeholder="Enter your full name" name="name"></tr>
-                <br> 
-                <tr><input type="text" placeholder="Enter your Address" name="name"></tr>
-                <br>
-                <tr><input type="text" placeholder="Enter your contact " name="name"></tr>
-                <br>
-                <tr><input type="text" placeholder="Enter your email address" name="name"></tr>
-                <br>
-                <label for="choice1"> PICK UP</label>
+                    <p>J&A AQUAMART</p>
+                    <h4>WATER REFILLING STATION</h>
 
-                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-    
-                <label for="choice2"> DELIVERY</label>
-                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">    
-                <br>
-                <br>
-                <hr>
-                <br>
-                <tr><div class="btn">
-                    <a href="" class='color2'>ORDER</a>
-                    
-                    <a href="" class='color3'>PRICES</a>
+                        <br>
+                        <span></span>
+                        <br>
+                        <j> </j>
+                        <br>
+                        <h3>ORDER SLIP</h3>
+                        <hr>
+                        </hr>
+                        <br>
+                        <form name="fields" action="#">
+                            <tr><input type="text" id="customer_fullname" placeholder="Enter your full name"
+                                    name="fname" required></tr>
+                            <br>
+                            <tr><input type="text" id="customer_address" placeholder="Enter your Address" name="address"
+                                    required></tr>
+                            <br>
+                            <tr><input type="number" id="customer_contact" placeholder="Enter your contact"
+                                    maxlength="12" name="phone" required></tr>
+                            <br>
+                            <tr>
+                                    <input type="email" id="customer_email" placeholder="Enter your email address"
+                                        name="email">
+                            </tr>
+                            <br>
+                            <label for="choice1"> PICK UP</label>
 
+                            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
 
+                            <label for="choice2"> DELIVERY</label>
+                            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                            <br>
+                            <br>
+                            <hr>
+                            <br>
+                            <tr>
+                                <div class="btn">
+                                    <button class='color2' onclick="ValidateEmail(document.fields.email)">ORDER</button>
+                                    <a href="" class='color3'>PRICES</a>
+                                </div>
+                        </form>
+            </div>
 
+        </div>
+    </div>
+    </fieldset>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Sidebar</h2>
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i>Click Here to Order</a></li>
+                <li><a href="#"><i class="fas fa-user"></i>Contact</a></li>
+                <li><a href="#"><i class="fas fa-address-card"></i>About</a></li>
+            </ul>
 
-
-
-				</div>
-		</div>	
+        </div>
 
 	</div>
 </div>
@@ -73,9 +93,8 @@
         </ul> 
        
     </div>
-  
-      </div>
     </div>
-</div>
+    </div>
+    <script src="EmailValidator.js"></script>
 </body>
 </html>
