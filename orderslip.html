@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>J&A AQUAMART WEBSITE</title>
+	<link rel="shortcut icon" type="image/x-icon" href="img/new.png" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+	<input type="checkbox" id="checkbox">
+	<header class="header">
+		<h2 class="u-name">SIDE <b>BAR</b>
+			<label for="checkbox">
+				<i id="navbtn" class="fa fa-bars" aria-hidden="true"></i>
+			</label>
+		</h2>
+		<i class="fa fa-user" aria-hidden="true"></i>
+	</header>
+	<div class="body">
+		<nav class="side-bar">
+			<div class="user-p">
+				<img src="img/new.png">
+				<h4>J&A AquaMart <br>Water Refilling Station</h4>
+			</div>
+			<ul>
+				<li>
+					<a href="#">
+						<i class="fa fa-home" aria-hidden="true"></i>
+						<a href="index.html"><span>Home</span></a>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+						<a href="orderslip.html"><span>Order</span></a>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fa fa-phone" aria-hidden="true"></i>
+						<a href="contact.html"><span>Contact</span></a>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fa fa-info-circle" aria-hidden="true"></i>
+						<a href="about.html"><span>About</span></a>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="wrapper">
+            <br>
+            <div class="title">
+                J&A AQUAMART<br>WATER REFILLING STATION
+            </div>
+                <span></span>
+                <br>
+                <h4 style="text-align: center; font-family: sans-serif; color: #4A403A;">ORDER SLIP</h4>
+                <hr>
+                </hr>
+                <br>
+            <div class="form">
+               <div class="inputfield">
+                  <label>Full Name</label>
+                  <input type="text" class="input" required>
+               </div>  
+               <div class="inputfield">
+                <label>Address</label>
+                <textarea class="input" required></textarea>
+             </div> 
+               
+               <div class="inputfield">
+                <label>Phone Number</label>
+                <input type="number" class="input" required>
+             </div>
+                <div class="inputfield">
+                  <label>Email Address</label>
+                  <input type="email" class="input" name="myEmail" required>
+               </div> 
+			   <div class="inputfield">
+				<label>Reservation</label>
+  				<input type="datetime-local" class="input">
+			 </div> 
+			 <br>
+              <div class="inputfield terms">
+                  <label class="check">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                  <br>
+                  <p style="margin-right:20px;">PICK UP</p>
+				<label class="check">
+				  <input type="checkbox">
+				  <span class="checkmark"></span>
+				</label>
+				<br>
+				<p>DELIVERY</p>
+			 </div> 
+               <br>
+              <div class="inputfield">
+                <a href="order.html"><input type="submit" value="Submit"></a>	
+              </div>
+            </div>
+        </div>	
+	</div>
+
+</body>
+</html>
