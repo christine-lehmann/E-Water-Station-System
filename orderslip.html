@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/form.css">
+	<link rel="stylesheet" href="css/w3.css">
 </head>
 <body>
 	<input type="checkbox" id="checkbox">
@@ -65,50 +66,41 @@
                 <hr>
                 </hr>
                 <br>
-            <div class="form">
+            <div class="form" name="fields">
                <div class="inputfield">
                   <label>Full Name</label>
-                  <input type="text" class="input" required>
+                  <input type="text" id="field_name" class="input" required>
                </div>  
                <div class="inputfield">
                 <label>Address</label>
-                <textarea class="input" required></textarea>
+                <textarea class="input" id="field_address" required></textarea>
              </div> 
                
                <div class="inputfield">
                 <label>Phone Number</label>
-                <input type="number" class="input" required>
+				<input class="input" type="number" id="field_phone" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;" />
              </div>
-                <div class="inputfield">
+                <div class="inputfield" id="emails">
                   <label>Email Address</label>
-                  <input type="email" class="input" name="myEmail" required>
+                  <input type="email" class="input" name="myEmail" id="field_email" required>
                </div> 
 			   <div class="inputfield">
 				<label>Reservation</label>
-  				<input type="datetime-local" class="input">
+  				<input type="datetime-local" id="field_date" class="input">
 			 </div> 
 			 <br>
-              <div class="inputfield terms">
-                  <label class="check">
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                  </label>
-                  <br>
-                  <p style="margin-right:20px;">PICK UP</p>
-				<label class="check">
-				  <input type="checkbox">
-				  <span class="checkmark"></span>
-				</label>
-				<br>
-				<p>DELIVERY</p>
-			 </div> 
+				<input class="w3-radio" type="radio" name="method" value="pickup" checked>
+				<label class="w3-validate">PICKUP</label>
+				<input class="w3-radio w3-margin-left" type="radio" name="method" value="pickup" checked>
+				<label class="w3-validate">DELIVERY</label>
                <br>
-              <div class="inputfield">
-                <a href="order.html"><input type="submit" value="Submit"></a>	
+              <div class="w3-container w3-center w3-margin">
+                <button class="w3-button w3-blue w3-round-large w3-hover-light-blue"
+				onclick="formValidatorBuilder('field_name','field_address','field_phone','field_email','field_date')">Submit</button>
               </div>
             </div>
         </div>	
 	</div>
-
+	<script src="js/FormValidator.js"></script>
 </body>
 </html>
