@@ -3,7 +3,11 @@ const colors = document.querySelectorAll('.color');
 const shoes = document.querySelectorAll('.shoe');
 const gradients = document.querySelectorAll('.gradient');
 const shoeBg = document.querySelector('.shoeBackground');
-
+const queryTitle = document.querySelector('.big');
+const parentPrice = document.querySelector('.price');
+const childPriceClass = parentPrice.querySelector('h1');
+const title = ["1 Gallon(faucet)","1 Gallon(dispenser)","Half Gallon","500 ML","350 ML"];
+const price = ["₱50.00","₱50.00","₱30.00","₱20.00","₱10.00"]
 let prevColor = "blue";
 let animationEnd = true;
 
@@ -19,9 +23,8 @@ function changeColor(){
     let shoe = document.querySelector(`.shoe[color="${color}"]`);
     let gradient = document.querySelector(`.gradient[color="${color}"]`);
     let prevGradient = document.querySelector(`.gradient[color="${prevColor}"]`);
-
     if(color == prevColor) return;
-
+    
     colors.forEach(c => c.classList.remove('active'));
     this.classList.add('active');
 
@@ -41,9 +44,19 @@ function changeColor(){
         animationEnd = true;
     })
 }
+//init title
+labelChanger(title[0],price[0]);
+
+//simple workaround so that we can sync title and prices
+for (let i = 0 ; i != colors.length; ++i){ 
+    colors[i].addEventListener('click', function() {
+        labelChanger(title[i],price[i]);
+    });
+}
 
 sizes.forEach(size => size.addEventListener('click', changeSize));
 colors.forEach(c => c.addEventListener('click', changeColor));
+
 
 let x = window.matchMedia("(max-width: 1000px)");
 
@@ -57,6 +70,11 @@ function changeHeight(){
     }
 }
 
+function labelChanger(mytitle,myprice){
+    queryTitle.innerHTML = mytitle;
+    childPriceClass.innerHTML = myprice;
+}
 changeHeight();
 
 window.addEventListener('resize', changeHeight);
+
