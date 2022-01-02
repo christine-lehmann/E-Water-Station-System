@@ -62,12 +62,3 @@ def client_info(request, pk):
     
  
     # GET / PUT / DELETE ClientData
-    
-        
-@api_view(['GET'])
-def tutorial_list_published(request):
-    client = ClientData.objects.filter(published__in=[True])
-
-    if request.method == 'GET':
-        clientdata_serializer = ClientData_Serializer(client, many=True)
-        return JsonResponse(clientdata_serializer.data, safe=False)

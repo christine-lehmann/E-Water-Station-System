@@ -7,10 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>J&A AQUAMART WEBSITE</title>
-	<link rel="shortcut icon" type="image/x-icon" href="img/new.png" />
+	{% load static %}
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/new.png' %}" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/order.css">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/order.css' %}">
 
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap" rel="stylesheet">
@@ -28,32 +29,32 @@
 	<div class="body">
 		<nav class="side-bar">
 			<div class="user-p">
-				<img src="img/new.png">
+				<img src="{% static 'img/new.png' %}">
 				<h4>J&A AquaMart <br>Water Refilling Station</h4>
 			</div>
 			<ul>
 				<li>
 					<a href="#">
 						<i class="fa fa-home" aria-hidden="true"></i>
-						<a href="index.html"><span>Home</span></a>
+						<a href="{% url 'index' %}"><span>Home</span></a>
 					</a>
 				</li>
 				<li>
 					<a href="#">
 						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-						<a href="orderslip.html"><span>Order</span></a>
+						<a href="{% url 'orderslip' %}"><span>Order</span></a>
 					</a>
 				</li>
 				<li>
 					<a href="#">
 						<i class="fa fa-phone" aria-hidden="true"></i>
-						<a href="contact.html"><span>Contact</span></a>
+						<a href="{% url 'contact' %}"><span>Contact</span></a>
 					</a>
 				</li>
 				<li>
 					<a href="#">
 						<i class="fa fa-info-circle" aria-hidden="true"></i>
-						<a href="about.html"><span>About</span></a>
+						<a href="{% url 'about' %}"><span>About</span></a>
 					</a>
 				</li>
 			</ul>
@@ -72,11 +73,11 @@
 					<!--<img src="img/logo.png" alt="" class="logo">-->
 					<!--<a href="#" class="share"><i class="fas fa-share-alt"></i></a>-->
 	
-					<img src="img/1.png" alt="" class="shoe show" color="blue">
-					<img src="img/2.png" alt="" class="shoe" color="red">
-					<img src="img/3.png" alt="" class="shoe" color="green">
-					<img src="img/4.png" alt="" class="shoe" color="orange">
-					<img src="img/5.png" alt="" class="shoe" color="black">
+					<img src="{% static 'img/1.png' %}" alt="" class="shoe show" color="blue">
+					<img src="{% static 'img/2.png' %}" alt="" class="shoe" color="red">
+					<img src="{% static 'img/3.png' %}" alt="" class="shoe" color="green">
+					<img src="{% static 'img/4.png' %}" alt="" class="shoe" color="orange">
+					<img src="{% static 'img/5.png' %}" alt="" class="shoe" color="black">
 	
 				</div>
 				<div class="info">
@@ -146,7 +147,7 @@
 				</div>
 			</div>
 		</div>
-		<script src="js/app.js"></script>
+		<script src="{% static 'js/app.js' %}"></script>
 	</div>
 
 </body>

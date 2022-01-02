@@ -6,17 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>J&A AQUAMART WEBSITE</title>
-	<link rel="shortcut icon" type="image/x-icon" href="img/new.png" />
+  {% load static %}
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/new.png'%}" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/socmed.css">
-    <link rel="stylesheet" href="css/about.css">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/socmed.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+{% load static %}
 <body>
 	<input type="checkbox" id="checkbox">
 	<header class="header">
@@ -30,35 +32,36 @@
 	<div class="body">
 		<nav class="side-bar">
 			<div class="user-p">
-				<img src="img/new.png">
+				<img src="{% static 'img/new.png' %}">
 				<h4>J&A AquaMart <br>Water Refilling Station</h4>
 			</div>
 			<ul>
-				<li>
-					<a href="#">
-						<i class="fa fa-home" aria-hidden="true"></i>
-						<a href="index.html"><span>Home</span></a>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-						<a href="orderslip.html"><span>Order</span></a>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-phone" aria-hidden="true"></i>
-						<a href="contact.html"><span>Contact</span></a>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-info-circle" aria-hidden="true"></i>
-						<a href="about.html"><span>About</span></a>
-					</a>
-				</li>
-			</ul>
+				<ul>
+					<li>
+						<a href="#">
+							<i class="fa fa-home" aria-hidden="true"></i>
+							<a href="{% url 'index' %}"><span>Home</span></a>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+							<a href="{% url 'orderslip' %}"><span>Order</span></a>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-phone" aria-hidden="true"></i>
+							<a href="{% url 'contact' %}"><span>Contact</span></a>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-info-circle" aria-hidden="true"></i>
+							<a href="{% url 'about' %}"><span>About</span></a>
+						</a>
+					</li>
+				</ul>
 		</nav>
 		<div class="section">
             <div class="container">
@@ -103,7 +106,7 @@
                   </div>  
                 <div class="image-section">
                     <br><br><br><br>
-                    <img src="img/ewater.jpg">
+                    <img src="{% static 'img/ewater.jpg' %}">
                 </div>
             </div>
         </div>
