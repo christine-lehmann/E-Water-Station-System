@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from EWater_api.models import ClientData
-
-class ClientData_Serializer(serializers.ModelSerializer):
+from EWater_api.models import ClientData, OrderData
+ 
+ 
+class ClientSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = ClientData
@@ -10,4 +11,17 @@ class ClientData_Serializer(serializers.ModelSerializer):
                   'fullname',
                   'address',
                   'email',
-                  'reservation')
+                  'verified')
+
+class OrderDataSerializer(serializers.ModelSerializer):
+ 
+    class Meta:
+        model = OrderData
+        fields = ('id',
+                  'phone',
+                  'fullname',
+                  'address',
+                  'item',
+                  'pendingPayment',
+                  'Paid',
+                  'Delivered')
