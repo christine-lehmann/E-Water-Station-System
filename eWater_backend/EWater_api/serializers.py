@@ -24,4 +24,5 @@ class OrderDataSerializer(serializers.ModelSerializer):
                   'item',
                   'pendingPayment',
                   'Paid',
-                  'Delivered')
+                  'Delivered',
+                  'reservationDate')
