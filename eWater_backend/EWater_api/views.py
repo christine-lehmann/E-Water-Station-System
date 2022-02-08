@@ -16,7 +16,7 @@ def client_list(request):
             
             phone = request.GET.get('phone', None)
             if phone is not None:
-                client_object = ClientData.filter(phone__icontains=phone)
+                client_object = ClientData.objects.filter(phone__icontains=phone)
             
             client_serializer = ClientSerializer(client_object, many=True)
             return JsonResponse(client_serializer.data, safe=False)
