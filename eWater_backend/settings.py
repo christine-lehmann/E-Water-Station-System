@@ -79,18 +79,21 @@ WSGI_APPLICATION = 'eWater_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv("db_engine"),
-        'NAME': os.getenv("db_name"),
-        'HOST': os.getenv("db_host"),
-        'PORT': os.getenv("db_port"),
-        'USERNAME': os.getenv("db_username"),
-        'PASSWORD': os.getenv("db_password"),
-        'SSL':  True,
-    }
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            'host': os.getenv("db_host"),
+            'port': 10255,
+            'name': os.getenv("db_name"),
+            'username': os.getenv("db_username"),
+            'password': os.getenv("db_password"),
+            'ssl': True,
+            'retrywrites': False,
+        },
+    },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
