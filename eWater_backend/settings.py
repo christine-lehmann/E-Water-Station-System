@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-7dzs+1_1a4w93q(zi!j8rhob=_wzpt=i+vw^ortrbe26v^2%0f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -79,15 +79,21 @@ WSGI_APPLICATION = 'eWater_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'eWater_db',
-        'HOST': '127.0.0.1',
-        'PORT': 27017,
-    }
+        'CLIENT': {
+            'host': os.getenv("db_host"),
+            'port': 10255,
+            'name': os.getenv("db_name"),
+            'username': os.getenv("db_username"),
+            'password': os.getenv("db_password"),
+            'ssl': True,
+            'retrywrites': False,
+        },
+    },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
