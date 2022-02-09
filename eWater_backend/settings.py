@@ -81,10 +81,13 @@ WSGI_APPLICATION = 'eWater_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'jj-water-station-server',
-        'HOST': 'jj-water-station-server.mongo.cosmos.azure.com',
-        'PORT': 10255,
+        'ENGINE': os.getenv("db_engine"),
+        'NAME': os.getenv("db_name"),
+        'HOST': os.getenv("db_host"),
+        'PORT': os.getenv("db_port"),
+        'USERNAME': os.getenv("db_username"),
+        'PASSWORD': os.getenv("db_password"),
+        'SSL':  True,
     }
 }
 
