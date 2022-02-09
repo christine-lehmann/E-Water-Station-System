@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'EWater_api.apps.EwaterApiConfig',
     'webpage.apps.WebpageConfig',
+    'apps.home'
 ]
 
 MIDDLEWARE = [
