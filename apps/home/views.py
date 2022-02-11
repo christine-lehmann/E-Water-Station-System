@@ -4,21 +4,20 @@
 """
 
 from django import template
-from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 
 
-@login_required(login_url="/login/")
+@staff_member_required
 def index(request):
     context = {'segment': 'index'}
-
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
 
-@login_required(login_url="/login/")
+@staff_member_required
 def pages(request):
     context = {}
     # All resource paths end in .html.
