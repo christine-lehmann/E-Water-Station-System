@@ -12,5 +12,13 @@ urlpatterns = [
     url(r'^api/orders$', views.order_list),
     url(r'^api/orders/(?P<pk>[0-9]+)$', views.order_detail),
     url(r'^api/orders/paid$', views.Order_list_paid),
-    url(r'^api/orders/delivered$', views.Order_list_delivered)
+    url(r'^api/orders/delivered$', views.Order_list_delivered),
+
+    ### Order status routes ###
+    url(r'^api/orders/status$', views.order_status_list),
+    url(r'^api/orders/status/(?P<pk>[0-9]+)$', views.order_status_detail),
+
+    ### Statistics routes ###
+    url(r'^api/statistics$', views.order_stats_list),
+    url(r'^api/statistics/(?P<pk>[0-9]+)$', views.order_stats_detail),
 ]
