@@ -147,25 +147,48 @@ def Order_list_paid(request):
 
 ############### START OF ORDER Status VIEW ####################################
 
+from django.core.mail import EmailMessage
 from .models import OrderStatus
 from .serializers import OrderStatusSerializer
+from django.template.loader import get_template
 
 @api_view(['GET', 'POST', 'DELETE'])
 def order_status_list(request):
     if request.method == 'GET':
             Order_object = OrderStatus.objects.all()
-            
             phone = request.GET.get('phone', None)
             if phone is not None:
                 Order_object = OrderStatus.filter(phone__icontains=phone)
-            
             order_serializer = OrderStatusSerializer(Order_object, many=True)
             return JsonResponse(order_serializer.data, safe=False)
+
     elif request.method == 'POST':
         document = JSONParser().parse(request)
         orders_serializer = OrderStatusSerializer(data=document)
         if orders_serializer.is_valid():
             orders_serializer.save()
+            
+            ctx = {
+                'id': orders_serializer.data.get('id'),
+                'fullname': orders_serializer.data.get('fullname'),
+                'address': orders_serializer.data.get('address'),
+                'phone': orders_serializer.data.get('phone'),
+                'email': orders_serializer.data.get('email'),
+                'item': orders_serializer.data.get('item'),
+                'quantity': orders_serializer.data.get('quantity'),
+                'price': orders_serializer.data.get('payment'),
+            }
+
+            message = get_template("email_template.html").render(ctx)
+
+            mail = EmailMessage(
+                subject="Order confirmation",
+                body=message,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[orders_serializer.data.get("email"),],
+            )
+            mail.content_subtype = "html"
+            mail.send()
             return JsonResponse(orders_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(orders_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
@@ -207,6 +230,8 @@ def order_status_detail(request, pk):
 
 from .models import Order_stats_sales # Order_stats_sales
 from .serializers import OrderStatsSerializer # OrderStatsSerializer
+from django.conf import settings
+from django.core.mail import send_mail
 
 @api_view(['GET', 'POST', 'DELETE'])
 def order_stats_list(request):
@@ -219,6 +244,7 @@ def order_stats_list(request):
             
             order_serializer = OrderStatsSerializer(Order_object, many=True)
             return JsonResponse(order_serializer.data, safe=False)
+
     elif request.method == 'POST':
         document = JSONParser().parse(request)
         orders_serializer = OrderStatsSerializer(data=document)
