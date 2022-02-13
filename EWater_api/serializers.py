@@ -38,7 +38,8 @@ class OrderStatusSerializer(serializers.ModelSerializer):
                   'item',
                   'quantity',
                   'payment',
-                  'status',)
+                  'status',
+                  'DateAccepted')
 
 class OrderStatsSerializer(serializers.ModelSerializer):
 

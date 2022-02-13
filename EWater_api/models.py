@@ -25,6 +25,7 @@ class OrderStatus(models.Model):
     quantity = models.IntegerField(blank=True, null=True)
     payment = models.IntegerField(blank=True, null=True)
     status = models.CharField(max_length=15,blank=False, default='Preparing')
+    DateAccepted = models.DateTimeField(auto_now_add=True)
 
 class Order_stats_sales(models.Model):
     item = models.CharField(max_length=15,blank=False, default='GALLON 1')
