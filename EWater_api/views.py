@@ -145,3 +145,144 @@ def Order_list_paid(request):
 
 ############### END OF ORDER VIEW ####################################
 
+############### START OF ORDER Status VIEW ####################################
+
+from django.core.mail import EmailMessage
+from .models import OrderStatus
+from .serializers import OrderStatusSerializer
+from django.template.loader import get_template
+
+@api_view(['GET', 'POST', 'DELETE'])
+def order_status_list(request):
+    if request.method == 'GET':
+            Order_object = OrderStatus.objects.all()
+            phone = request.GET.get('phone', None)
+            if phone is not None:
+                Order_object = OrderStatus.filter(phone__icontains=phone)
+            order_serializer = OrderStatusSerializer(Order_object, many=True)
+            return JsonResponse(order_serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        document = JSONParser().parse(request)
+        orders_serializer = OrderStatusSerializer(data=document)
+        if orders_serializer.is_valid():
+            orders_serializer.save()
+            
+            ctx = {
+                'id': orders_serializer.data.get('id'),
+                'fullname': orders_serializer.data.get('fullname'),
+                'address': orders_serializer.data.get('address'),
+                'phone': orders_serializer.data.get('phone'),
+                'email': orders_serializer.data.get('email'),
+                'item': orders_serializer.data.get('item'),
+                'quantity': orders_serializer.data.get('quantity'),
+                'price': orders_serializer.data.get('payment'),
+            }
+
+            message = get_template("email_template.html").render(ctx)
+
+            mail = EmailMessage(
+                subject="Order confirmation",
+                body=message,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[orders_serializer.data.get("email"),],
+            )
+            mail.content_subtype = "html"
+            mail.send()
+            return JsonResponse(orders_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(orders_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    elif request.method == 'DELETE':
+        count = OrderStatus.objects.all().delete()
+        return JsonResponse({'message': '{} Order_object were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+ 
+@api_view(['GET', 'PUT', 'DELETE'])
+def order_status_detail(request, pk):
+    
+    try: 
+        orders = OrderStatus.objects.get(pk=pk) 
+    except OrderStatus.DoesNotExist: 
+        return JsonResponse({'message': 'The orders does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+    
+    if request.method == 'GET': 
+        orders_serializer = OrderStatusSerializer(orders) 
+        return JsonResponse(orders_serializer.data) 
+    
+    elif request.method == 'PUT': 
+        document = JSONParser().parse(request) 
+        orders_serializer = OrderStatusSerializer(orders, data=document) 
+        if orders_serializer.is_valid(): 
+            orders_serializer.save() 
+            return JsonResponse(orders_serializer.data) 
+        return JsonResponse(orders_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE': 
+        orders.delete() 
+        return JsonResponse({'message': 'orders was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == 'DELETE':
+        count = OrderStatus.objects.all().delete()
+        return JsonResponse({'message': '{} Order_object were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
+############### END OF ORDER Status VIEW ####################################
+
+############### START OF ORDER Stats VIEW ####################################
+
+from .models import Order_stats_sales # Order_stats_sales
+from .serializers import OrderStatsSerializer # OrderStatsSerializer
+from django.conf import settings
+from django.core.mail import send_mail
+
+@api_view(['GET', 'POST', 'DELETE'])
+def order_stats_list(request):
+    if request.method == 'GET':
+            Order_object = Order_stats_sales.objects.all()
+            
+            phone = request.GET.get('phone', None)
+            if phone is not None:
+                Order_object = Order_stats_sales.filter(phone__icontains=phone)
+            
+            order_serializer = OrderStatsSerializer(Order_object, many=True)
+            return JsonResponse(order_serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        document = JSONParser().parse(request)
+        orders_serializer = OrderStatsSerializer(data=document)
+        if orders_serializer.is_valid():
+            orders_serializer.save()
+            return JsonResponse(orders_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(orders_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    elif request.method == 'DELETE':
+        count = Order_stats_sales.objects.all().delete()
+        return JsonResponse({'message': '{} Order_object were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+ 
+@api_view(['GET', 'PUT', 'DELETE'])
+def order_stats_detail(request, pk):
+    
+    try: 
+        orders = Order_stats_sales.objects.get(pk=pk) 
+    except Order_stats_sales.DoesNotExist: 
+        return JsonResponse({'message': 'The orders does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+    
+    if request.method == 'GET': 
+        orders_serializer = OrderStatsSerializer(orders) 
+        return JsonResponse(orders_serializer.data) 
+    
+    elif request.method == 'PUT': 
+        document = JSONParser().parse(request) 
+        orders_serializer = OrderStatsSerializer(orders, data=document) 
+        if orders_serializer.is_valid(): 
+            orders_serializer.save() 
+            return JsonResponse(orders_serializer.data) 
+        return JsonResponse(orders_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE': 
+        orders.delete() 
+        return JsonResponse({'message': 'orders was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == 'DELETE':
+        count = Order_stats_sales.objects.all().delete()
+        return JsonResponse({'message': '{} Order_object were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
+############### END OF ORDER Stats VIEW ####################################

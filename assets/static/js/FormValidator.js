@@ -26,6 +26,7 @@ function formValidatorBuilder(name,address,tel,email,reservation) {
         var makeOrder = {   "phone":_tel.value,
                             "fullname":_name.value,
                             "address":_address.value,
+                            "email":_email.value,
                             "reservationDate":_reservation.value }
         jQuery.ajax({
                 type : "POST",

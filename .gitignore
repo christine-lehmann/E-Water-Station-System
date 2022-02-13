@@ -87,5 +87,7 @@ local_settings.py
 
 .env
 db.sqlite3
-eWater_backend/static
-eWater_backend/EWater_api/migrations
+eWater_backend/static/
+EWater_api/migrations/
+apps/authentication/migrations/
+apps/home/migrations/
