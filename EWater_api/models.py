@@ -30,4 +30,4 @@ class OrderStatus(models.Model):
 class Order_stats_sales(models.Model):
     item = models.CharField(max_length=15,blank=False, default='GALLON 1')
     price = models.IntegerField(blank=True, null=True)
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True)
