@@ -17,6 +17,7 @@ class OrderDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderData
         fields = ('id',
+                  'item_id',
                   'phone',
                   'fullname',
                   'address',
@@ -31,6 +32,7 @@ class OrderStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderStatus
         fields = ('id',
+                  'item_id',
                   'phone',
                   'fullname',
                   'address',
@@ -46,6 +48,8 @@ class OrderStatsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order_stats_sales
         fields = ('id',
+                  'item_id',
                   'item',
+                  'quantity',
                   'price',
                   'date')

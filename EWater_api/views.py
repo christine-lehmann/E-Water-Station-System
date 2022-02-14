@@ -1,6 +1,8 @@
-from django.shortcuts import render
+import random
+from django.shortcuts import redirect, render
 
 from django.http.response import JsonResponse
+from django.template import context
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
  
@@ -20,6 +22,7 @@ def client_list(request):
             
             client_serializer = ClientSerializer(client_object, many=True)
             return JsonResponse(client_serializer.data, safe=False)
+
     elif request.method == 'POST':
         document = JSONParser().parse(request)
         clients_serializer = ClientSerializer(data=document)
@@ -71,6 +74,23 @@ def Client_list_verified(request):
 ############# END OF CLIENT VIEW #######################################
 
 
+############# Start of Orderslip session saver #######################################
+
+def client_info_builder(request):
+
+    fullname = request.POST.get('fullname')
+    address = request.POST.get('address')
+    phone = request.POST.get('phone')
+    email = request.POST.get('email')
+    reservation = request.POST.get('reservation')
+    context = {'fullname':fullname,'address':address,'phone':phone,'email':email,'reservation':reservation}
+    
+    return render(request, 'order.html', context=context)
+
+
+############### END of Orderslip session saver ####################################
+
+
 ############### START OF ORDER VIEW ####################################
 
 from .models import OrderData
@@ -91,10 +111,29 @@ def order_list(request):
         document = JSONParser().parse(request)
         orders_serializer = OrderDataSerializer(data=document)
         if orders_serializer.is_valid():
-            orders_serializer.save()
+            orders_serializer.save(item_id=random.randint(1,500))
+            ctx = {
+                'id': orders_serializer.data.get('item_id'),
+                'fullname': orders_serializer.data.get('fullname'),
+                'address': orders_serializer.data.get('address'),
+                'phone': orders_serializer.data.get('phone'),
+                'email': orders_serializer.data.get('email'),
+                'item': orders_serializer.data.get('item'),
+                'quantity': orders_serializer.data.get('quantity'),
+                'price': orders_serializer.data.get('payment'),
+            }
+            message = get_template("email/email_order_confirm.html").render(ctx)
+            mail = EmailMessage(
+                subject="Order Confirmation",
+                body=message,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[orders_serializer.data.get("email"),],
+            )
+            mail.content_subtype = "html"
+            mail.send()
+
             return JsonResponse(orders_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(orders_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
     elif request.method == 'DELETE':
         count = OrderData.objects.all().delete()
         return JsonResponse({'message': '{} Order_object were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
@@ -167,9 +206,9 @@ def order_status_list(request):
         orders_serializer = OrderStatusSerializer(data=document)
         if orders_serializer.is_valid():
             orders_serializer.save()
-            
+            status_item = orders_serializer.data.get('status')
             ctx = {
-                'id': orders_serializer.data.get('id'),
+                'id': orders_serializer.data.get('item_id'),
                 'fullname': orders_serializer.data.get('fullname'),
                 'address': orders_serializer.data.get('address'),
                 'phone': orders_serializer.data.get('phone'),
@@ -178,17 +217,28 @@ def order_status_list(request):
                 'quantity': orders_serializer.data.get('quantity'),
                 'price': orders_serializer.data.get('payment'),
             }
-
-            message = get_template("email_template.html").render(ctx)
-
+            if status_item == "Deployed":
+                message = get_template("email/email_order_ship.html").render(ctx)
+                mail = EmailMessage(
+                    subject="Delivery in progress",
+                    body=message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    to=[orders_serializer.data.get("email"),],
+                )
+                mail.content_subtype = "html"
+                mail.send()
+                
+            ## if false 
+            message = get_template("email/email_order_accepted.html").render(ctx)
             mail = EmailMessage(
-                subject="Order confirmation",
-                body=message,
-                from_email=settings.EMAIL_HOST_USER,
-                to=[orders_serializer.data.get("email"),],
-            )
+                    subject="Confirmed order",
+                    body=message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    to=[orders_serializer.data.get("email"),],
+                )
             mail.content_subtype = "html"
             mail.send()
+            
             return JsonResponse(orders_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(orders_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
@@ -216,7 +266,30 @@ def order_status_detail(request, pk):
             return JsonResponse(orders_serializer.data) 
         return JsonResponse(orders_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    elif request.method == 'DELETE': 
+    elif request.method == 'DELETE':
+        document = JSONParser().parse(request)
+        orders_serializer = OrderStatusSerializer(orders, data=document)
+        #########
+        ctx = {
+                'id': orders_serializer.data.get('id'),
+                'fullname': orders_serializer.data.get('fullname'),
+                'address': orders_serializer.data.get('address'),
+                'phone': orders_serializer.data.get('phone'),
+                'email': orders_serializer.data.get('email'),
+                'item': orders_serializer.data.get('item'),
+                'quantity': orders_serializer.data.get('quantity'),
+                'price': orders_serializer.data.get('payment'),
+        }
+        message = get_template("email/email_order_declined.html").render(ctx)
+        mail = EmailMessage(
+        subject="Order declined",
+                    body=message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    to=[orders_serializer.data.get("email"),],
+            )
+        mail.content_subtype = "html"
+        mail.send()
+
         orders.delete() 
         return JsonResponse({'message': 'orders was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
@@ -226,7 +299,7 @@ def order_status_detail(request, pk):
 
 ############### END OF ORDER Status VIEW ####################################
 
-############### START OF ORDER Stats VIEW ####################################
+############### START OF ORDER Statistics VIEW ####################################
 
 from .models import Order_stats_sales # Order_stats_sales
 from .serializers import OrderStatsSerializer # OrderStatsSerializer
