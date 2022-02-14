@@ -22,7 +22,8 @@ function formValidatorBuilder(phone,fullname,address,email,reservation) {
                             "payment":parseInt(_price),
                             "reservationDate":_reservation
                         }
-        /*
+        alert("Thankyou for your order! kindly check your email for your order information")
+        window.location.href = '/';
         jQuery.ajax({
             type : "POST",
             dataType:'json',
@@ -32,8 +33,7 @@ function formValidatorBuilder(phone,fullname,address,email,reservation) {
                 alert("Thankyou for your order! kindly check your email for your order information");
                 window.location.href = '/';
             }
-        });
-        */
+        });   
         console.log(JSON.stringify(makeOrder)) // for debgging purpose
         
     
