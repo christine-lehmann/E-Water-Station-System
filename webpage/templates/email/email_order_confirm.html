@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <br>
+        <h2>Thank you for your order {{ fullname }}</h2>
+        <p>
+            Please, wait for the admin to confirm your order
+        </p>
+        <h3>Your Order ID: {{ id }}</h3>
+
+
+        <h3>Shipping Details:</h3>
+
+       Reciepient: {{ fullname }} <br/>
+       Home Address: {{ address }} <br/>
+
+        <h3>
+            Contact Details:
+        </h3>
+        Email: {{ email }} <br/>
+        Phone: {{ phone }}
+
+        <h2>Order Details:</h2>
+        <table border="1" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total Amount Due</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td style="text-align:center">{{ item }}</td>
+                        <td style="text-align:center">{{ quantity }}</td>
+                        <td style="text-align:center">{{ price }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

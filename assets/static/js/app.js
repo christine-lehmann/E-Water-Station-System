@@ -5,9 +5,10 @@ const gradients = document.querySelectorAll('.gradient');
 const shoeBg = document.querySelector('.shoeBackground');
 const queryTitle = document.querySelector('.big');
 const parentPrice = document.querySelector('.price');
-const childPriceClass = parentPrice.querySelector('h1');
+const childPriceClass = parentPrice.querySelector('#price');
+
 const title = ["1 Gallon(faucet)","1 Gallon(dispenser)","Half Gallon","500 ML","350 ML"];
-const price = ["₱50.00","₱50.00","₱30.00","₱20.00","₱10.00"]
+const price = ["50.00","50.00","30.00","20.00","10.00"]
 let prevColor = "blue";
 let animationEnd = true;
 
@@ -57,7 +58,6 @@ for (let i = 0 ; i != colors.length; ++i){
 sizes.forEach(size => size.addEventListener('click', changeSize));
 colors.forEach(c => c.addEventListener('click', changeColor));
 
-
 let x = window.matchMedia("(max-width: 1000px)");
 
 function changeHeight(){
@@ -74,6 +74,7 @@ function labelChanger(mytitle,myprice){
     queryTitle.innerHTML = mytitle;
     childPriceClass.innerHTML = myprice;
 }
+
 changeHeight();
 
 window.addEventListener('resize', changeHeight);

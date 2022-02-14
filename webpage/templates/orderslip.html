@@ -69,41 +69,40 @@
                 </hr>
                 <br>
             <div class="form" name="fields">
-               <div class="inputfield">
-                  <label>Full Name</label>
-                  <input type="text" id="field_name" class="input" required>
-               </div>  
-               <div class="inputfield">
-                <label>Address</label>
-                <textarea class="input" id="field_address" required></textarea>
-             </div> 
-               
-               <div class="inputfield">
-                <label>Phone Number</label>
-				<input class="input" type="number" id="field_phone" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;" />
-             </div>
-                <div class="inputfield" id="emails">
-                  <label>Email Address</label>
-                  <input type="email" class="input" name="myEmail" id="field_email" required>
-               </div> 
-			   <div class="inputfield">
-				<label>Reservation</label>
-  				<input type="datetime-local" id="field_date" class="input">
-			 </div> 
-			 <br>
-				<input class="w3-radio" type="radio" name="method" value="pickup" checked>
-				<label class="w3-validate">PICKUP</label>
-				<input class="w3-radio w3-margin-left" type="radio" name="method" value="pickup" checked>
-				<label class="w3-validate">DELIVERY</label>
-               <br>
-              <div class="w3-container w3-center w3-margin">
-                <button class="w3-button w3-blue w3-round-large w3-hover-light-blue"
-				onclick="formValidatorBuilder('field_name','field_address','field_phone','field_email','field_date')">Submit</button>
-              </div>
+				<form method="POST" action= {% url 'order' %}>
+					{% csrf_token %}
+					<div class="inputfield">
+						<label>Full Name</label>
+						<input type="text" id="field_name" class="input" name="fullname" required>
+					 </div>  
+					 <div class="inputfield">
+					  <label>Address</label>
+					  <textarea class="input" id="field_address" name="address" required></textarea>
+				   </div> 
+					 
+					 <div class="inputfield">
+					  <label>Phone Number</label>
+					  <input class="input" name="phone" type="number" id="field_phone" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;" />
+				   </div>
+					  <div class="inputfield" id="emails">
+						<label>Email Address</label>
+						<input type="email" class="input" name="email" id="field_email" required>
+					 </div> 
+					 <div class="inputfield">
+					  <label>Reservation</label>
+						<input type="datetime-local" id="field_date" name="reservation" class="input">
+				   </div> 
+				   <br>
+					  <br>
+					  <div class="w3-container w3-center w3-margin">
+						<input class="w3-button w3-blue w3-round-large w3-hover-light-blue"
+					  	type="submit" name="Submit"></input>
+					  </div>
+					 <br>
+				</form>
             </div>
         </div>	
 	</div>
 	<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
-	<script src="{% static 'js/FormValidator.js' %}"></script>
 </body>
 </html>

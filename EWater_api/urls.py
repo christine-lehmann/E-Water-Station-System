@@ -3,6 +3,9 @@ from EWater_api import views
 
 urlpatterns = [ 
 
+    ### Orderslip session builder route
+    url(r'^orderslip/order$', views.client_info_builder, name='order'),
+
     #### Client routes ###
     url(r'^api/client$', views.client_list),
     url(r'^api/client/(?P<pk>[0-9]+)$', views.client_detail),
