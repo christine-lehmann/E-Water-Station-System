@@ -91,3 +91,5 @@ eWater_backend/static/
 EWater_api/migrations/
 apps/authentication/migrations/
 apps/home/migrations/
+EWater_api/__pycache__/
+EWater_api/migrations/__pycache__
